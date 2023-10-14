@@ -29,7 +29,7 @@ String id = (String)session.getAttribute("sid");
 <%
 if(id.equals("admin")){
 	%>
-	<button type="button" onclick="href.location='adminWriteForm.jsp'">공지글 작성</button>
+	<button type="button" onclick="window.location='adminWriteForm.jsp'">공지글 작성</button>
 	<%
 }
 %>

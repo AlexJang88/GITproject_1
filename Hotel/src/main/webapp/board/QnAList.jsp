@@ -18,7 +18,6 @@ String id = (String)session.getAttribute("sid");
 <div>전체</div>
 	<div>
 	<%list=dao.getList(20); 
-	
 	%>
 	</div>
 <div>예약</div>
