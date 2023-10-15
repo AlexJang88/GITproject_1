@@ -4,6 +4,15 @@
 <jsp:useBean id="dto" class=hotel.bean.boardDTO/>
 <jsp:setProperty property="*" name="dto"/>
 <%
+String id = (String)session.getAttribute("sid");
+if(id==null){
+	%>
+	<script>
+		alert("로그인후 이용해주세요");
+		window.location("main.jsp");
+	</script>
+	<%
+}
 request.setCharacterEncoding("UTF-8");
 boardDAO dao = boardDAO.getInstance();
 dao.BoardInsert(dto);
@@ -14,10 +23,17 @@ if(num>=20){
 	alert("작성되었습니다.");
 	window.location="QnAList.jsp";
 </script>
-<%}else{ %>
+<%}else if(num==10){ %>
 <script>
 	alert("작성되었습니다.");
 	window.location="notice.jsp";
 </script>
-<%} %>
+<%}else{
+	%>
+	<script>
+	alert("작성되었습니다.");
+	window.location="question.jsp";
+</script>
+	<%
+} %>
 
