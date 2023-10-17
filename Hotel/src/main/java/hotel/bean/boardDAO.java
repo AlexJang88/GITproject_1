@@ -23,7 +23,7 @@ public class boardDAO extends OracleDB{
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
 		int cate=num;
 		String sql="";
-		if(cate!=20&&cate!=30) {
+		if(cate==20) {
 			sql="select * from board where category>? and category<30";
 		}else{
 			sql="select * from board where category=?";
@@ -51,7 +51,7 @@ public class boardDAO extends OracleDB{
 		
 	}
 	
-	public void BoardInsert(boardDTO dto) {
+	public void boardInsert(boardDTO dto) {
 		try {
 			conn=getConnection();
 			String sql="insert into board(num,content,title,category) values(board_seq.nextval,?,?,?)";
@@ -65,6 +65,58 @@ public class boardDAO extends OracleDB{
 		}finally {
 			close(rs, pstmt, conn);
 		}
+	}
+	public void boardUpdate(boardDTO dto) {
+		int result=0;
+		try {
+			conn=getConnection();
+			String sql="update board set title=?,content=? where num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getTitle());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setInt(3, dto.getNum());
+			result=pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+	}
+	public void boardDelete(int num) {
+		try {
+			conn=getConnection();
+			String sql="delete from board where num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+	}
+	public ArrayList<boardDTO> getSerchList(String keyworkd){
+		ArrayList<boardDTO> list= new ArrayList<boardDTO>();
+		try {
+			conn=getConnection();
+			String sql="select * from board where title like ? or title like ? and category>20";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyworkd+"%");
+			pstmt.setString(2, sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				boardDTO dto= new boardDTO();
+				dto.setContent(rs.getString("content"));
+				dto.setNum(rs.getInt("num"));
+				dto.setTitle(rs.getString("title"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}return list;
 	}
 	
 	

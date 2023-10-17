@@ -17,4 +17,5 @@
 제목<input type="text" name="title"><br/>
 내용<br/>
 <textarea rows="6" cols="30" name="content"></textarea>
+<input type="submit" value="작성">
 </form>

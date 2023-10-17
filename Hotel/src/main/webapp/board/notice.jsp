@@ -20,16 +20,31 @@ String id = (String)session.getAttribute("sid");
 	String title=dto.getTitle();
 	String reg=df.format(dto.getReg());
 	String content=dto.getContent();
-	%><div>
-		<%=title%><br>
+	%><div class="board-item">
+		<a href="javascript:void(0);" onclick="toggleContent('content_<%=dto.getNum()%>');"><%=title%></a>
+		<%if(id.equals("admin")){ %>
+		<button onclick="window.location='boardUpdateForm.jsp?num=<%=dto.getNum()%>&category=<%=dto.getCategory()%>'">수정</button>
+		<button onclick="window.location='boardDelete.jsp?num=<%=dto.getNum()%>&category=<%=dto.getCategory()%>'">삭제</button>
+		<%} %>
+		<br>
 		<%=reg%><br>
-		<%=content%>
+		<div id="content_<%=dto.getNum()%>" style="display: none;"><%=dto.getContent()%></div>
 	</div><hr /><%
 } %>
 <%
 if(id.equals("admin")){
 	%>
-	<button type="button" onclick="window.location='adminWriteForm.jsp'">공지글 작성</button>
+	<button type="button" onclick="window.location='writeForm.jsp'">공지글 작성</button>
 	<%
 }
 %>
+<script>
+function toggleContent(contentId) {
+    var contentDiv = document.getElementById(contentId);
+    if (contentDiv.style.display === "none") {
+        contentDiv.style.display = "block";
+    } else {
+        contentDiv.style.display = "none";
+    }
+}
+</script>
