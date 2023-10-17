@@ -1,10 +1,11 @@
 <%@page import="hotel.bean.boardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean id="dto" class=hotel.bean.boardDTO/>
+<jsp:useBean id="dto" class="hotel.bean.boardDTO"/>
 <jsp:setProperty property="*" name="dto"/>
 <%
 String id = (String)session.getAttribute("sid");
+dto.setId(id);
 if(id==null){
 	%>
 	<script>
@@ -15,7 +16,7 @@ if(id==null){
 }
 request.setCharacterEncoding("UTF-8");
 boardDAO dao = boardDAO.getInstance();
-dao.BoardInsert(dto);
+dao.boardInsert(dto);
 int num=dto.getCategory();
 if(num>=20){
 %>

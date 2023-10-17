@@ -93,44 +93,12 @@ function toggleCategory(contentId) {
 	var c4=document.getElementById("content_serch");
 	var c5=document.getElementById("content_login");
 	var c6=document.getElementById("content_etc");
-	if(contentId=="content_all"){
-		c6.style.display = "none";
-		c2.style.display = "none";
-		c3.style.display = "none";
-		c4.style.display = "none";
-		c5.style.display = "none";
-	}if(contentId=="content_reserve"){
-		c1.style.display = "none";
-		c6.style.display = "none";
-		c3.style.display = "none";
-		c4.style.display = "none";
-		c5.style.display = "none";
-	}if(contentId=="content_checkin"){
-		c1.style.display = "none";
-		c2.style.display = "none";
-		c6.style.display = "none";
-		c4.style.display = "none";
-		c5.style.display = "none";
-	}if(contentId=="content_serch"){
-		c1.style.display = "none";
-		c2.style.display = "none";
-		c3.style.display = "none";
-		c6.style.display = "none";
-		c5.style.display = "none";
-	}if(contentId=="content_login"){
-		c1.style.display = "none";
-		c2.style.display = "none";
-		c3.style.display = "none";
-		c4.style.display = "none";
-		c6.style.display = "none";
-	}if(contentId=="content_etc"){
-		c1.style.display = "none";
-		c2.style.display = "none";
-		c3.style.display = "none";
-		c4.style.display = "none";
-		c5.style.display = "none";
-						}
-	
+	c1.style.display ="none";
+	c2.style.display ="none";
+	c3.style.display ="none";
+	c4.style.display ="none";
+	c5.style.display ="none";
+	c6.style.display ="none";
     var contentDiv = document.getElementById(contentId);
     if (contentDiv.style.display === "none") {
         contentDiv.style.display = "block";

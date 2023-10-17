@@ -4,7 +4,8 @@
 
 <%
 session.setAttribute("sid","admin");
-if(!session.getAttribute("sid").equals("admin")){
+String id = (String)session.getAttribute("sid");
+if(!id.equals("admin")){
 	%>
 	<script>
 		alert("관리자만 접근할수 있습니다.");
@@ -25,5 +26,6 @@ if(!session.getAttribute("sid").equals("admin")){
 	</select><br />
 	제목 :<input type="text" name="title"><br />
 	내용 :<textarea rows="7" cols="30" name="content"></textarea><br />
+	<input type="hidden" name="id" value="<%=id%>">
 	<input type="submit">
 </form>

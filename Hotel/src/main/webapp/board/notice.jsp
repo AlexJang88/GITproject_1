@@ -4,7 +4,6 @@
 <%@page import="hotel.bean.boardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="/css.jsp" %>
 <%
 request.setCharacterEncoding("UTF-8");
 boardDAO dao = boardDAO.getInstance();
