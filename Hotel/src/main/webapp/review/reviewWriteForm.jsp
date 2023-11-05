@@ -76,18 +76,3 @@
 <%
     }
 %>
-<script>
-function changeImg(num){
-	if(num==1){
-		document.getElementById("img").src="../resources/img/heart1.jpeg";
-	}else if(num==2){
-		document.getElementById("img").src="../resources/img/heart2.jpeg";
-	}else if(num==3){
-		document.getElementById("img").src="../resources/img/heart3.jpeg";
-	}else if(num==4){
-		document.getElementById("img").src="../resources/img/heart4.jpeg";
-	}else if(num==5){
-		document.getElementById("img").src="../resources/img/heart5.jpeg";
-	}
-}
-</script>

@@ -6,14 +6,12 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ include file="list_menu.jsp" %>
 <%
-request.setCharacterEncoding("UTF-8");
-	String id="";
 	if(session.getAttribute("sid")==null){
 		id="guest";
 	}else{
 		id=(String)session.getAttribute("sid");
 	}
-	
+	request.setCharacterEncoding("UTF-8");
 	String title1 = request.getParameter("title");
 	String checkin1 = request.getParameter("checkin");
 	String checkout1 = request.getParameter("checkout");
@@ -23,33 +21,33 @@ request.setCharacterEncoding("UTF-8");
 	int room1 = Integer.parseInt(request.getParameter("room"));
 	String check1 = request.getParameter("check");
 	int[] roomValue1 = new int[rortlf];
-	   int[] kidsValue1 = new int[rortlf];
-	   int[] test = new int[rortlf];
-	   String val="";
-	   for (int i = 0; i < rortlf; i++) {
-	      String adultParam = request.getParameter("a" + (i + 1));
-	       String kidsParam = request.getParameter("k" + (i + 1));
-	       
-	       int adultValues = 2; 
-	       int kidsValuee = 0; 
+	int[] kidsValue1 = new int[rortlf];
+	int[] test = new int[rortlf];
+	String val="";
+	for (int i = 0; i < rortlf; i++) {
+		String adultParam = request.getParameter("a" + (i + 1));
+	    String kidsParam = request.getParameter("k" + (i + 1));
+	    
+	    int adultValues = 2; 
+	    int kidsValuee = 0; 
 
-	       if (adultParam != null) {
-	           adultValues = Integer.parseInt(adultParam);
-	       }
+	    if (adultParam != null) {
+	        adultValues = Integer.parseInt(adultParam);
+	    }
 
-	       if (kidsParam != null) {
-	           kidsValuee = Integer.parseInt(kidsParam);
-	       }
+	    if (kidsParam != null) {
+	        kidsValuee = Integer.parseInt(kidsParam);
+	    }
 
-	       roomValues += adultValues;
-	       kidsValues += kidsValuee;
-	       
-	       test[i] = adultValues + kidsValuee;
-	       
-	       roomValue1[i] = adultValues;
-	       kidsValue1[i] = kidsValuee; 
-	       val += "&a" + (i+1) + "=" + roomValue1[i] + "&k" + (i+1) + "=" + kidsValue1[i];
-	   }
+	    roomValues += adultValues;
+	    kidsValues += kidsValuee;
+	    
+	    test[i] = adultValues + kidsValuee;
+	    
+	    roomValue1[i] = adultValues;
+	    kidsValue1[i] = kidsValuee; 
+	    val += "&a" + (i+1) + "=" + roomValue1[i] + "&k" + (i+1) + "=" + kidsValue1[i];
+	}
 	
 	int pageSize = 10;
 	String pageNum = request.getParameter("pageNum");
@@ -81,32 +79,12 @@ request.setCharacterEncoding("UTF-8");
 	}
 	String block2 = block1.toString();
 %>
-<div id="con_top">
-<div id="content">
+<body onload="qq();">
 <input type="hidden" id="vel"/>
 <input type="hidden" id="block" value="<%=block2%>"/>
-<div id="all_h">
-<form id="option1" method="post">
-	<div id="h_sel">
-	<input type="hidden" name="title1" value="<%= title1%>">
-	<input type="hidden" name="checkin1" value="<%= checkin1%>">
-	<input type="hidden" name="checkout1" value="<%= checkout1%>">
-	<input type="hidden" name="adult1" value="<%= adult1%>">
-	<input type="hidden" name="kid1" value="<%= kid1%>">
-	<input type="hidden" name="sel1" value="<%= sel1%>">
-	<input type="hidden" name="c1" value="<%= check1 %>">
-		<select id="hselect">
-			<option value="1">최신순</option>
-			<option value="2">인기순</option>
-			<option value="3">가격높은순</option>
-			<option value="4">가격낮은순</option>
-			<option value="5">평점순</option>
-		</select>
-	</div>
-</form>
-
+<input type="hidden" id="rr" value="<%=room1%>"/>
 <div class="grid">
-<div class="box">
+<div class="box" id="box11">
 <form id="option" method="post">
 	<div id="h_chk">
 		<input type="hidden" name="title1" value="<%= title1%>">
@@ -125,6 +103,24 @@ request.setCharacterEncoding("UTF-8");
 			<li><input type="checkbox" class="chk" name="chk" value="4" />기타숙소</li>
 		</ul>
 	</div>
+	
+	<div id="h_sel">
+	<input type="hidden" name="title1" value="<%= title1%>">
+	<input type="hidden" name="checkin1" value="<%= checkin1%>">
+	<input type="hidden" name="checkout1" value="<%= checkout1%>">
+	<input type="hidden" name="adult1" value="<%= adult1%>">
+	<input type="hidden" name="kid1" value="<%= kid1%>">
+	<input type="hidden" name="sel1" value="<%= sel1%>">
+	<input type="hidden" name="c1" value="<%= check1 %>">
+		<select id="hselect">
+			<option value="1">최신순</option>
+			<option value="2">인기순</option>
+			<option value="6">조회순</option>
+			<option value="3">가격높은순</option>
+			<option value="4">가격낮은순</option>
+			<option value="5">평점순</option>
+		</select>
+	</div>
 </form>
 </div>
 <div class="box" id="box2">
@@ -132,44 +128,37 @@ request.setCharacterEncoding("UTF-8");
 <hr>
 <div id="sel1" class="sel"> 
 <%
-   for(hotelDTO dto : list){
-      Integer check = dao.checkRoom(block2, dto.getNum());
-      String[] img = dto.getImg().split(",");
-      ArrayList<hotelDTO> li2 = dao.getContent(dto.getRef());
-      boolean zt = dao.getTest(li2, test, room1);
-%>    
-   <div class="list_c">
-   <input type="hidden" value="<%=check %>"/>
-   <%
-      if (check >= room1 || block2 == ""){
-          
-   %>
-   <a href="/BookStay/hotel/hotelContent.jsp?title=<%=dto.getTitle()%>&ref=<%=dto.getRef()%>&block=<%=block2%>
-   &checkin=<%=checkin1%>&checkout=<%=checkout1%>&adult=<%=adult1%>&kids=<%=kid1%>&room=<%=room1%>
-   &select=<%=sel1%>&check=<%=check1%><%=val%>">
-      <div class="list_s">
-      <div>
-       <img src="/BookStay/upload/<%=img[0]%>"/>
-       </div>
-       <div class="mar">
-       <div class="title"><%= dto.getTitle() %></div>
-       <div class="addr"><%= dto.getAddress() %></div>
-       <div class="qnrktp">세금 및 부가세 불포함</div>
-       <div class="apr"><%= dto.getPrice() %>원</div>
-       </div>
-       <%
-       if(zt){
-       %>
-       <div class="rBtn"><button type="button" class="btn btn-success">예약</button></div>
-       <% }else{%>
-       <div><button type="button" class="btn btn-warning">예약 불가</button></div>
-       <%} %>
-      </div>
-   </a>
+	for(hotelDTO dto : list){
+		Integer check = dao.checkRoom(block2, dto.getNum());
+		ArrayList<hotelDTO> li2 = dao.getContent(dto.getRef());
+		boolean zt = dao.getTest(li2, test, room1);
+%>	 
+	<div class="list_c">
+	<input type="hidden" value="<%=check %>"/>
+	<%
+		if (check >= room1 || block2 == ""){
+	 		
+	%>
+	<a href="/BookStay/hotel/hotelContent.jsp?title=<%=dto.getTitle()%>&ref=<%=dto.getRef()%>&block=<%=block2%>
+	&checkin=<%=checkin1%>&checkout=<%=checkout1%>&adult=<%=adult1%>&kids=<%=kid1%>&room=<%=room1%>
+	&select=<%=sel1%>&check=<%=check1%><%=val%>">
+		<div class="list_s">
+		<div>
+    	<img src="/BookStay/upload/<%= dto.getImg() %>"/>
+    	</div>
+    	<div class="mar">
+    	<div class="title"><%= dto.getTitle() %></div>
+    	<div class="addr"><%= dto.getAddress() %></div>
+    	<div class="qnrktp">세금 및 부가세 불포함</div>
+    	<div class="apr"><%= dto.getPrice() %>원</div>
+    	</div>
+    	<div class="rBtn"><button type="button" class="btn btn-success">예약</button></div>
+		</div>
+	</a>
 		<%
     	if(id.equals("admin")){
     	%>	
-    		<div><button type="button" onclick="window.location.href='hotelDelete.jsp'" class="btn btn-danger">삭제</button></div>
+    		<div class="xx"><button type="button" onclick="window.location.href='hotelDelete.jsp'" class="btn btn-danger">삭제</button></div>
     	<%	
     	}
     	%>
@@ -179,31 +168,40 @@ request.setCharacterEncoding("UTF-8");
     	if(id.equals("admin")){
     	%>	
     	<a href="/BookStay/hotel/hotelContent.jsp?title=<%=dto.getTitle()%>&ref=<%=dto.getRef()%>&block=<%=block2%>">
+    		<div class="list_s">
     		<div>
-	    	<img src="/BookStay/upload/<%= dto.getImg() %>" style="width:100px;"/>
-	    	<%= dto.getTitle() %>
-	    	<%= dto.getAddress() %>
-	    	<%= dto.getPrice() %>
-	    	<div><button type="button" class="btn btn-warning">예약 불가</button></div>
+	    	<img src="/BookStay/upload/<%= dto.getImg() %>"/>
+    		</div>
+    		<div class="mar">
+    		<div class="title"><%= dto.getTitle() %></div>
+    		<div class="addr"><%= dto.getAddress() %></div>
+    		<div class="qnrktp">세금 및 부가세 불포함</div>
+    		<div class="apr"><%= dto.getPrice() %>원</div>
+	    	</div>
+	    	<div class="rBtn"><button type="button" class="btn btn-warning">예약 불가</button></div>
 			</div>
 			</a>
     		<button type="button" onclick="window.location.href='hotelDelete.jsp'" class="btn btn-danger">삭제</button>
+    		<hr>
     	<%	
     	}else{
     	%>
 		<div class="list_s">
-    	<img src="/BookStay/upload/<%= dto.getImg() %>" style="width:100px;"/>
-    	<%= dto.getTitle() %>
-    	<%= dto.getAddress() %>
-    	<%= dto.getPrice() %>
-    	<div><button type="button" class="btn btn-warning">예약 불가</button></div>
+		<div>
+    	<img src="/BookStay/upload/<%= dto.getImg() %>"/>
+    	</div>
+    	<div class="mar">
+    	<div class="title"><%= dto.getTitle() %></div>
+    	<div class="addr"><%= dto.getAddress() %></div>
+    	<div class="qnrktp">세금 및 부가세 불포함</div>
+    	<div class="apr"><%= dto.getPrice() %>원</div>
 		</div>
+    	<div class="rBtn"><button type="button" class="btn btn-warning">예약 불가</button></div>
+		</div>
+		<hr>
 		<%}%>
 	</div>
 <%}}%>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -230,8 +228,9 @@ request.setCharacterEncoding("UTF-8");
 	}
 %>
 		</div>	
-		</div>
-
+		<!-- <%@ include file="footer.jsp" %> -->
+		
+		</body>
 <script>
 	var sel1Input = document.querySelector('input[name="sel1"]');
 	var hselect = document.getElementById("hselect");

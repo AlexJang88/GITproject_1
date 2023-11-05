@@ -24,7 +24,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <%
 MemberDAO mdao = MemberDAO.getInstance();
-mdao.checkHuman();
 String id = (String) session.getAttribute("sid");
 int grade= mdao.checkGrade(id);
 %>
@@ -80,15 +79,11 @@ int grade= mdao.checkGrade(id);
 	    <div class="swiper-slide"><img src="/BookStay/resources/img/bg3.jpg"/></div>
 	    <div class="swiper-slide"><img src="/BookStay/resources/img/bg4.jpg"/></div>
 	  </div>
-	  <!-- If we need pagination -->
 	  <div class="swiper-pagination"></div>
 	
-	  <!-- If we need navigation buttons -->
 	  <div class="swiper-button-prev"></div>
 	  <div class="swiper-button-next"></div>
 	
-	  <!-- If we need scrollbar -->
-	  <div class="swiper-scrollbar"></div>
 	</div>
 </div>
 <div id="logo">
@@ -143,7 +138,7 @@ int grade= mdao.checkGrade(id);
 			<input type="hidden" id="rortlf" name="rortlf" value="1"/>
 			<input type="button" id="cad" value="적용"/>
 		</div>
-		<button id="sub" type="submit" class="btn btn-success">검색하기</button>
+		<button id="subb" type="submit" class="btn btn-success">검색하기</button>
 		<input type="hidden" name="category" value="0"/>
 	</form>
 	<div id="p"></div>
@@ -166,7 +161,7 @@ int grade= mdao.checkGrade(id);
 	<%
 	request.setCharacterEncoding("UTF-8");
 	ArrayList<hotelDTO> list;
-	String[] types = {"서울", "부산", "제주도", "인천", "여수", "수원", "대전", "광주", "대구", "속초"};
+	String[] types = {"서울", "부산", "제주", "인천", "여수", "수원", "대전", "광주", "대구", "속초"};
 
 	for(int i=0; i <types.length; i++){
 		list = dao.hothotel(types[i]);
@@ -176,15 +171,14 @@ int grade= mdao.checkGrade(id);
 	<div class="grid">
 	 <%
 	 for(hotelDTO dto : list){
-		 String[] img = dto.getImg().split(",");
 	 %> 
 	 <a id="hoth" href="/BookStay/hotel/hotelContent.jsp?title=<%=dto.getTitle()%>&ref=<%=dto.getRef()%>&block=<%=block2%>
 	&checkin=<%=start%>&checkout=<%=end%>&adult=2&kids=0&room=1&select=1&check=1,2,3,4">
 	 <div class="box">
-		<img src="/BookStay/upload/<%=img[0]%>" width="300" height="100"/>
-		<div class="h_box">
-		<%= dto.getTitle() %>
-		<%= dto.getPrice() %>
+		<img class="b1 b3" src="/BookStay/upload/<%= dto.getImg() %>"/>
+		<div class="h_box b1 b2">
+		<div><%= dto.getTitle() %></div>
+		<div class="pri"><b id="b"><%= dto.getPrice() %></b>원~</div>
 		</div>	
 	</div>
 	</a>

@@ -608,29 +608,4 @@ public class MemberDAO extends  OracleDB {
 				close(rs, pstmt, conn);
 			} return grade;
 		}
-	    public void checkHuman() {
-	    	try {
-				conn=getConnection();
-				String sql="update member set grade=81 where lastlogin<(select add_months(to_date(sysdate,'yyyy-MM-DD'),-3) pre_month from dual)";
-				pstmt=conn.prepareStatement(sql);
-				pstmt.executeUpdate();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rs, pstmt, conn);
-			}
-	    }
-	    public void humanRelease(String id) {
-	    	try {
-				conn=getConnection();
-				String sql="update member set grade=0 where id=?";
-				pstmt=conn.prepareStatement(sql);
-				pstmt.setString(1, id);
-				pstmt.executeUpdate();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				close(rs, pstmt, conn);
-			}
-	    }
 }

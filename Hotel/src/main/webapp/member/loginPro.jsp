@@ -41,21 +41,8 @@
     			
     		}
     			session.setAttribute("sid", dto.getId());
-    			MemberDAO mdao = new MemberDAO();
-    			int grade=mdao.checkGrade(dto.getId());
-    			if(grade==81){
-    			%>
-    			<script>
-    				if(confirm("휴먼계정입니다. 비밀번호를 변경하여 휴먼해제 하시겠습니까?")){
-    					window.location="/BookStay/member/updateFirst.jsp";
-    				}else{
-    					window.location="/BookStay/member/logout.jsp";
-    				}
-    			</script>
-    			<%
-    			}else{
     	        response.sendRedirect("../views/main.jsp");
-    			}
+    	        
     	}else{response.sendRedirect("loginform.jsp?loginFailed=true");
     	
     	}

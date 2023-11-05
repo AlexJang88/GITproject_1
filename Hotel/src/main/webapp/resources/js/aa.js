@@ -9,7 +9,6 @@ document.getElementById('cadd').addEventListener('click', function() {
   newContent.classList.add('rortlf');
   count += 1;
   newContent.innerHTML = `
-  	<hr>
     <h5>객실${count}</h5>
     <div>성인 <input type="number" id="adult${count}" name="adult" value="2"  max="4" min="1"/></div>
     <div>어린이 (만 17세 미만) <input type="number" id="kids${count}" name="kids" value="0"  max="4" min="0"/></div>
@@ -132,7 +131,7 @@ function upRoomCount() {
 	var endInput = form.querySelector('input[name="checkout"]');
 	var rortlf = form.querySelector('input[name="rortlf"]');
 	
-	document.getElementById('sub').addEventListener('click', function () {
+	document.getElementById('subb').addEventListener('click', function () {
 	  var titleValue = titleInput.value;
 	  var adultValue = adultInput.value;
 	  var kidsValue = kidsInput.value;
