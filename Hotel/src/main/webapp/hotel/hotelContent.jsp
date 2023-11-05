@@ -44,12 +44,6 @@ int grade= mdao.checkGrade(id);
  MemberDTO mdto = new MemberDTO();
  mdto=mdao.myInfo(id);
  String heart=mdto.getHeart();
- String [] service = null;
- if(maindto.getService()==null){
-	 service[0]="없음";
- }else{
-	 service=maindto.getService().split(",");
- }
 %>
 <%
 String title = request.getParameter("title");
@@ -282,21 +276,13 @@ for(hotelDTO dto : list){
 <table id="infor" border="1">
     <tr>
         <td style="width: 200px;" class="inforbg">체크인/체크아웃</td>
-        <td>체크인 : 03:00PM ~ <br> 체크아웃 : ~11:00AM</td>
+        <td>dddd</td>
         <td class="inforbg">연락처</td>
         <td><%=maindto.getContact() %></td>
     </tr>
     <tr>
         <td class="inforbg">시설 및 서비스</td>
-        <td colspan="3">
-        <%for(int i=0;i<service.length;i++){ %>
-        		■&nbsp;<%=service[i]%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	<%if(6%(i+7)==0){%>
-        		<br>
-        	<%} %>
-        
-        <%} %>
-        </td>
+        <td colspan="3"></td>
     </tr>
 </table>
 </div>

@@ -2,14 +2,20 @@ var count = 1;
 var totalAdults = 0;
 var totalKids = 0;
 
+function qq(){
+	var room1 = document.getElementById('rr').value;
+	if(room1 > 1){
+		count = room1;
+		}
+}
+
 document.getElementById('cadd').addEventListener('click', function() {
   var popup = document.getElementById('pop');
-  count++;
-
   var newContent = document.createElement('div');
   newContent.id = `pop${count}`;
+  newContent.classList.add('rortlf');
+  count++;
   newContent.innerHTML = `
-  	<hr>
     <h5>객실${count}</h5>
     <div>성인 <input type="number" id="adult${count}" name="adult${count}" value="2" max="4" min="1"/></div>
     <div>어린이 (만 17세 미만) <input type="number" id="kids${count}" name="kids${count}" value="0" max="4" min="0"/></div>
@@ -20,8 +26,8 @@ document.getElementById('cadd').addEventListener('click', function() {
   popup.appendChild(newContent);
   
   newContent.querySelector('.cRemove').addEventListener('click', function() {
-    popup.removeChild(newContent);
     count -= 1;
+    popup.removeChild(newContent);
 
     var remainingRooms = popup.getElementsByClassName('cRemove');
     for (var i = 0; i < remainingRooms.length; i++) {
@@ -30,7 +36,6 @@ document.getElementById('cadd').addEventListener('click', function() {
       var h5 = roomDiv.querySelector('h5');
       var inputs = roomDiv.querySelectorAll('input');
       var newIdSuffix = i + 2;
-      upRoomCount();
 
       h5.textContent = `객실${newIdSuffix}`;
 
@@ -47,7 +52,6 @@ document.querySelectorAll('.cRemove').forEach(function(button) {
 	count -= 1;
     var parent = this.closest('div');
     parent.parentNode.removeChild(parent);
-    upRoomCount();
 
     var remainingRooms = document.querySelectorAll('.cRemove');
     remainingRooms.forEach(function(room, index) {
@@ -69,12 +73,12 @@ document.querySelectorAll('.cRemove').forEach(function(button) {
 var val="";
 var totalror;
 var url="";
+
+document.getElementById('cad').addEventListener('click', function() {
   var totalAdults = 0;
   var totalKids = 0;
   var adultValues = [];
   var kidsValues = [];
-
-document.getElementById('cad').addEventListener('click', function() {
   var rortlf = document.getElementById('rortlf');
   var popBtn = document.getElementById('popBtn');
 
@@ -116,7 +120,8 @@ function ad(){
 	    var adultValue = parseInt(document.getElementById(`a${i}`).value);
     	var kidsValue2 = parseInt(document.getElementById(`k${i}`).value);
  	}
-    	url += `&a${i}=` + adultValue + `&k${i}=` + kidsValue1;
+    	url += `&a${i}=` + adultValue + `&k${i}=` + kidsValue2;
+    	alert(url);
 }
 
 function upRoomCount() {
@@ -135,8 +140,6 @@ function upRoomCount() {
 
 	var form = document.getElementById('searchForm');
 	var titleInput = form.querySelector('input[name="title"]');
-	var checkinInput = form.querySelector('input[name="checkin"]');
-	var checkoutInput = form.querySelector('input[name="checkout"]');
 	var adultInput = form.querySelector('input[name="adult"]');
 	var kidsInput = form.querySelector('input[name="kids"]');
 	var startInput = form.querySelector('input[name="checkin"]'); 
@@ -144,19 +147,17 @@ function upRoomCount() {
 	var rortlf = form.querySelector('input[name="rortlf"]');
 	var popBtn = document.getElementById('popBtn');
 	
-	document.getElementById('subb').addEventListener('click', function () {
-		
+document.getElementById('subb').addEventListener('click', function () {
+	var vel = document.getElementById('vel').value;
   var titleValue = titleInput.value;
   var adultValue = adultInput.value;
   var kidsValue1 = kidsInput.value;
   var startValue = startInput.value;
   var endValue = endInput.value;
   var rorValue = rortlf.value;
-  console.log("ddd" + url);
-  
   if(url == ""){
     form.action = 'hlist.jsp?title=' + titleValue + '&checkin=' + startValue + '&checkout=' + endValue
-      + '&adult=' + adultValue + '&kids=' + kidsValue1 + '&room=' + rorValue + '&select=1&check=1,2,3,4' + url;
+      + '&adult=' + adultValue + '&kids=' + kidsValue1 + '&room=' + rorValue + '&select=1&check=1,2,3,4' + vel;
   }else{
     form.action = 'hlist.jsp?title=' + titleValue + '&checkin=' + startValue + '&checkout=' + endValue
       + '&adult=' + adultValue + '&kids=' + kidsValue1 + '&room=' + rorValue + '&select=1&check=1,2,3,4' + url;

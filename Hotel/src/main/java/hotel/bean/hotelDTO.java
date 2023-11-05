@@ -24,6 +24,12 @@ public class hotelDTO {
 	public int getNum() {
 		return num;
 	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public void setNum(int num) {
 		this.num = num;
 	}
@@ -62,13 +68,6 @@ public class hotelDTO {
 	}
 	public void setService(String service) {
 		this.service = service;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
 	}
 	public String getAddress() {
 		return address;

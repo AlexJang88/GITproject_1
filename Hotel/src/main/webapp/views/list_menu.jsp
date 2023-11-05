@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="hotel.bean.MemberDAO"%>    
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -8,6 +9,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <%
 	request.setCharacterEncoding("UTF-8");
+	MemberDAO mdao = MemberDAO.getInstance();
+	String id = (String) session.getAttribute("sid");
+	int grade= mdao.checkGrade(id);
 	String title = request.getParameter("title");
 	String checkin = request.getParameter("checkin");
 	String checkout = request.getParameter("checkout");
@@ -45,7 +49,6 @@
 	    <input type="hidden" id="k<%=i+1%>" value="<%= kidsValue[i]%>"/>
 	<%}
 	String pcount = "객실 " + rortlf + "개, 인원 " + (roomValues + kidsValues) + "명";
-
 %>
 <!DOCTYPE html>
 <html>
@@ -56,42 +59,55 @@
 </head>
 <body>
 	<body>
+	<div id="header">
 	<div id="login">
-		<div><a href="login.jsp">로그인</a></div>
-		<div><a href="memberForm.jsp">회원가입</a></div>
-		<div>예약확인</div>
+		<%if(grade==11) { // 세션이 없다면 수행
+    String cid = null, cpw = null, cauto = null;
+    Cookie[] cookies = request.getCookies();
+  
+    	if (cookies != null) {
+       		 for (Cookie c : cookies) {
+		            if (c.getName().equals("cid")) { cid = c.getValue(); }
+		            if (c.getName().equals("cpw")) { cpw = c.getValue(); }
+		            if (c.getName().equals("cauto")) { cauto = c.getValue(); }
+   				}  
+ 		   	}
+    	if (cid != null && cpw != null && cauto != null) {
+    		response.sendRedirect("/BookStay/member/loginPro.jsp");	
+    	}
+    if (cid == null || cpw == null || cauto == null) { %>
+		<div><a href="/BookStay/member/loginform.jsp">로그인</a></div>
+		<div><a href="/BookStay/member/memberForm.jsp">회원가입</a></div>
+		<%}				
+		}if(grade==0 || grade==99){ %>
+		<div><a href="/BookStay/member/logout.jsp">로그아웃</a></div>
+		<div><a href="/BookStay/member/memberinfo.jsp">MyPage</a></div>
+		<%}%>
 		<div>고객센터</div>
+		<%if(grade==99){ %>
+		<div><a href="/BookStay/admin/adminMain.jsp">관리자페이지</a></div>
+		<%} %>	
+	</div>
+	<div id="logo">
+		<a href="main.jsp">
+			BookStay
+		</a>
+	</div>
 	</div>
 	<div id="main">
-		<a href="main.jsp"><img id="logo" src="/BookStay/resources/img/logo.svg"/></a>
-	</div>
-	<div id="button">
-	  <div class="button-link">
-	    <a href="main.jsp">
-	      <img id="home" src="/BookStay/resources/img/home.svg" alt="홈" />
-	      <span>홈</span>
-	    </a>
-	  </div>
-	  <div class="button-link">
-	    <a href="mypage.jsp">
-	      <img id="mypage" src="/BookStay/resources/img/mypage.svg" alt="마이" />
-	      <span>마이</span>
-	    </a>
-	  </div>
-	</div>
-	<div id="main">
+	<div id="search">
 	<input type="hidden" id = "tcnt" value="<%= rortlf%>"/>
 	<form method="post" id="searchForm">
-		<input type="text" name="title" value="<%=title%>"/>
-		<input type="text" name="datetimes" value="<%=checkin %> - <%=checkout %>" />
+		<input type="text" name="title" value="<%=title%>" id="title"/>
+		<input type="text" name="datetimes" id="date" value="<%=checkin %> - <%=checkout %>" />
 		<input type="hidden" id="start" name="checkin" value="<%=checkin %>"/>
 		<input type="hidden" id="end" name="checkout" value="<%=checkout %>"/>
 		<input type="button" value="<%=pcount %>" id="popBtn"/>
 		<div class="popup" id="popup">
 		<div id="pop">
 			<h5>객실1</h5>
-			<p>성인 <input type="number" id="adult1" name="adult" value="<%=adult%>" max="4" min="1"/></p><br>
-			<p>어린이 (만 17세 미만) <input type="number" id="kids1" name="kids" value="<%=kids%>" max="4" min="0"/></p>	
+			<div>성인 <input type="number" id="adult1" name="adult" value="<%=adult%>" max="4" min="1"/></div>
+			<div>어린이 (만 17세 미만) <input type="number" id="kids1" name="kids" value="<%=kids%>" max="4" min="0"/></div>	
 			<%for (int i = 1; i < rortlf; i++) {
 			    int adultValue = Integer.parseInt(request.getParameter("a" + (i + 1)));
 			    int kidsValue1 = Integer.parseInt(request.getParameter("k" + (i + 1)));
@@ -100,25 +116,27 @@
 			    kidsValue[i] = kidsValue1;  
 			    
 	  %>
-	  <div id="pop<%=i+1 %>">  
+	  <div id="pop<%=i+1 %>">
+	  <hr>
 	  <h5>객실<%=i+1%></h5>
-    <p>성인 <input type="number" id="adult<%=i+1%>" name="adult<%=i+1%>" value="<%=roomValue[i] %>" max="4" min="1"/></p><br>
-    <p>어린이 (만 17세 미만) <input type="number" id="kids<%=i+1%>" name="kids<%=i+1%>" value="<%=kidsValue[i] %>" max="4" min="0"/></p>
+    <div>성인 <input type="number" id="adult<%=i+1%>" name="adult<%=i+1%>" value="<%=roomValue[i] %>" max="4" min="1"/></div><br>
+    <div>어린이 (만 17세 미만) <input type="number" id="kids<%=i+1%>" name="kids<%=i+1%>" value="<%=kidsValue[i] %>" max="4" min="0"/></div>
     <button type="button" class="btn btn-danger cRemove">객실 삭제</button>
     </div>
+    <hr>
 	<%}%>
     </div>
 			<input type="button" id="cadd" value="객실 추가"/>
 			<input type="hidden" id="rortlf" name="rortlf" value="<%=rortlf%>"/>
 			<button type="button" id="cad" onclick="eValue">적용</button>
 		</div>
-		<button id="subb" type="submit" class="btn btn-success">검색하기</button>
+		<button id="subb" type="submit"><img src="/BookStay/resources/img/search.png"/></button>
 		<input type="hidden" name="category" id="hvalue" value="0"/>
 	</form>
 	<div id="p"></div>
+	</div>
 </div>
 </body>
-<script src="/BookStay/resources/js/ee.js"></script>
 <script>
 document.querySelectorAll('.num1').forEach(function(numElement) {
 	  var numInput = numElement.querySelector('input');
@@ -140,8 +158,9 @@ document.querySelectorAll('.num1').forEach(function(numElement) {
 	  });
 	});
 </script>
+<script src="/BookStay/resources/js/ee.js"></script>
 <script src="/BookStay/resources/js/date.js"></script>
 <script src="/BookStay/resources/js/popup.js"></script>
 <script src="/BookStay/resources/js/count.js"></script>
-<script src="/BookStay/resources/js/ee.js"></script>
+<script src="/BookStay/resources/js/menubar.js"></script>
 </html>

@@ -1,4 +1,3 @@
-<%@page import="hotel.bean.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="hotel.bean.reviewDTO" %>
 <%@ page import="hotel.bean.reviewDAO" %>
@@ -6,17 +5,9 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
-	MemberDAO mdao = MemberDAO.getInstance();
-	String id = (String) session.getAttribute("sid");
-	int grade= mdao.checkGrade(id);
-	if (grade!=11){
-	 %>
-	  <script>
-	  	alert("로그인 후 이용해주세요");
-	  	window.location="../views/main.jsp";
-	  </script>
-	<%}%>
-<%    
+
+    
+    String id = request.getParameter("id");
     int jumsu = Integer.parseInt(request.getParameter("jumsu"));
     String content = request.getParameter("content");
     String ref = request.getParameter("ref");

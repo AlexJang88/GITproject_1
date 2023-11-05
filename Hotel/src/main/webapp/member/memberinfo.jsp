@@ -88,6 +88,7 @@
 <input type="button" value="로그아웃" onclick="location.href='logout.jsp'" class="button-container">
 <input type="button" value="회원정보수정" onclick="location.href='updateFirst.jsp'" class="button-container">
 <input type="button" value="회원탈퇴" onclick="location.href='delete.jsp'" class="button-container">
+<a href="/BookStay/admin/adminlist.jsp">관리자 예약 내역 확인</a>
 </body>
 
 <%
