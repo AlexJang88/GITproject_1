@@ -90,7 +90,7 @@
         	</script>
         	<%
         }else{
-        int renum = dao.getOrderNum(id);
+        int renum = dao.getRecentOrder(id);
         
         %>
         <form action="cardProcess.jsp" method="post">

@@ -1,46 +1,49 @@
 <%@page import="hotel.bean.hotelDAO"%>
-<%@page import="hotel.bean.hotelDTO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <%@ page import="hotel.bean.HOrderDTO" %>
 <%@ page import="hotel.bean.HOrderDAO" %>
 <%@ page import="hotel.bean.MemberDTO" %>
 <%@ page import="hotel.bean.MemberDAO" %>
+<%@page import="hotel.bean.adminDAO"%>
+<%@page import="hotel.bean.adminDTO"%>
 <%@ page import="java.util.List" %> 
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/BookStay/resources/css/adminlist.css"/>
+<%@ include file="../views/main_bar.jsp" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-    // 세션에서 사용자 ID 가져오기
-    MemberDAO dao = MemberDAO.getInstance();
-    String id = (String) session.getAttribute("sid");
-    int grade= dao.checkGrade(id);
-    // 사용자 ID가 관리자 ID ("admin")와 일치하는지 확인
-    if (grade!=99) {
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+	if (grade!=99){
+		 %>
+		  <script>
+		  	alert("관리자만 접근할수 있습니다.");
+		  	window.location="../views/main.jsp";
+		  </script>
+	<%}else{%>
+	<%
+	adminDAO dao=adminDAO.getInstance();
+	adminDTO dto1 = dao.getPreView();
 %>
-    <script>
-        alert("관리자페이지입니다");
-        window.location="/BookStay/views/main.jsp";
-    </script>
-<%
-    }
-%>
-<%
-
-SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-	
-%>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>관리자 예약 확인</title>
-</head>
-<body>
-
-    <h1>관리자 예약 내역 확인</h1>
-    <table>
+<div id="list">
+	<ul id="ul1">
+	  <li><button id="bn1" type="button" onclick="window.location='/BookStay/admin/adminMain.jsp'">요약정보</button></li>
+	  <li><button id="bn2" type="button" onclick="window.location='/BookStay/admin/adminlist.jsp'">예약목록 </button></li>
+	  <li><button id="bn3" type="button" onclick="window.location='/BookStay/board/notice.jsp'">공지사항 </button></li>
+	  <li><button id="bn4" type="button" onclick="window.location='/BookStay/board/QnAList.jsp'">자주하는질문 </button></li>
+	  <li><button id="bn5" type="button" onclick="window.location='/BookStay/board/myQuestion.jsp'">1:1문의[<%=dto1.getNoanswer() %>] </button></li>
+	  <li><button id="bn6" type="button" onclick="window.location='/BookStay/hotel/hotelWriteForm.jsp'">숙박업소 글등록</button></li>
+	  <li><button id="bn7" type="button" onclick="window.location='/BookStay/admin/adminGradeList.jsp'">등급 관리/조회</button></li>
+	</ul>
+	<div id="f1">
+	<div id="tbcal">
+	<ul class="nav nav-tabs">
+	  <li class="nav-item">
+	    <a class="nav-link active" aria-current="page">예약목록</a>
+	  </li>
+	</ul>
+    <table id="table1">
         <tr>
             <th>예약 번호</th>
             <th>고객명</th>
@@ -54,14 +57,14 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
             <th>예약상태</th>
             <th>입금액입력</th>
             <th>예약취소</th>
-            
+
         </tr>
 
         <%
             // Java 코드를 사용하여 예약 내역을 가져와서 표시
             List<HOrderDTO> reservationList = new HOrderDAO().getOrdersAdmin();
             MemberDAO memberDAO = MemberDAO.getInstance(); // MemberDAO 인스턴스 생성
-			hotelDAO hdao = new hotelDAO();
+            hotelDAO hdao = new hotelDAO();
             for (HOrderDTO reservation : reservationList) {
             	String reg = new SimpleDateFormat("yyyy-MM-dd").format(reservation.getReg());
             	String checkin = reservation.getCheckin().substring(0,11);
@@ -117,12 +120,12 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 				</div>
 				<%}else if(status.equals("예약취소")){%>
 				<button type="button" class="btn btn-primary" disabled >없음</button>	
-					
+
 				<%}else{%>
 				<button type="button" class="btn btn-primary" onclick="window.location='adminStatusUpdate.jsp?confirm=true&renum=<%=reservation.getRenum()%>'">예약확정</button>
 				<%} %>
-				
-				
+
+
             <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropcancel<%=reservation.getRenum()%>">예약취소</button></td><!-- 입금액입력  -->
             <div class="modal fade" id="staticBackdropcancel<%=reservation.getRenum()%>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 				  <div class="modal-dialog">
@@ -146,9 +149,10 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 				  </div>
 				</div></td><!-- 예약취소 -->
         </tr>
-       
+
             <%}%>
     </table>
-    <input type="button" value="뒤로가기" onclick="location.href='../memeber/memberinfo.jsp'">
-</body>
-</html>
+    </div>
+</div>
+</div>
+<%}%>

@@ -57,37 +57,24 @@ public class HOrderDAO extends OracleDB {
 
 	    return orders;
 	}
-	public HOrderDTO getOrder(int renum) {
-	    HOrderDTO order = new HOrderDTO();
-	    String query = "select * from horder h,hotel r where h.ref=r.num and h.ref=?";
-	    
-	    try (Connection conn = getConnection(); // 새로운 데이터베이스 연결을 생성
-	         PreparedStatement stmt = conn.prepareStatement(query)) {
-	        stmt.setInt(1,renum);
-	        try (ResultSet rs = stmt.executeQuery()) {
-	            while (rs.next()) {
-	                order.setRenum(rs.getInt("renum"));
-	                order.setId(rs.getString("id"));
-	                order.setName(rs.getString("name"));
-	                order.setRoomtype(rs.getString("roomtype"));
-	                order.setRef(rs.getInt("ref"));
-	                order.setCheckin(rs.getString("checkin")); // 데이터베이스 컬럼 이름을 확인하고 수정
-	                order.setCheckout(rs.getString("checkout"));
-	                order.setAdult(rs.getInt("adult"));
-	                order.setKid(rs.getInt("kid"));
-	                order.setState(rs.getInt("state"));
-	                order.setPrice(rs.getInt("price"));
-	                order.setPaytype(rs.getString("paytype"));
-	            }
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }finally {
+	public int getRecentOrder(String id) {
+    	int result=0;
+    	try {
+			conn=getConnection();
+			String sql="select * from horder where id=? order by reg desc";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				result=rs.getInt("renum");
+			}
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			close(rs, pstmt, conn);
-		}
-
-	    return order;
-	}
+		}return result;
+    }
 	
 	public List<HOrderDTO> getOrdersAdmin() {
 	    List<HOrderDTO> orders = new ArrayList<>();
