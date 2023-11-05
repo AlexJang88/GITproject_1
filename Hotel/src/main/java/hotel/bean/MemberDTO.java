@@ -14,6 +14,7 @@ public class MemberDTO {
    private String heart;
    private int grade;	//0 : 일반 , 11:로그아웃상태 , 81 : 휴면  , 82 : 블랙리스트
    private Timestamp joindate;
+   private Timestamp lastlogin;
    
 public int getGrade() {
 	return grade;
@@ -80,6 +81,12 @@ public String getId() {
 	}
 	public void setJoindate(Timestamp joindate) {
 		this.joindate = joindate;
+	}
+	public Timestamp getLastlogin() {
+		return lastlogin;
+	}
+	public void setLastlogin(Timestamp lastlogin) {
+		this.lastlogin = lastlogin;
 	}
 	
 	
