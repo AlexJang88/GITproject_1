@@ -96,7 +96,6 @@ body{
 }
 #popup #cad{
 	width: 200px;
-	border: none;
 	background-color: green;
 	color: white;
 	border-radius: 5px;
@@ -148,10 +147,6 @@ body{
 	justify-content: center;
     grid-template-rows: 120px 120px 120px;
     grid-template-columns: 350px 350px 350px;
-    margin-bottom: 80px;
-}
-#popBtn{
-	margin-left: 50px;
 }
 .box{	  
 	border: none;
@@ -160,25 +155,9 @@ body{
 	justify-content: center;
 	padding: 10px;
 	justify-content: space-around;
-	text-align: left;
-	position: relative;
 }
 .box img{
 	width: 100px;
-}
-.pri{
-	position: absolute;
-	right: 15px;
-	bottom: 10px;
-}
-.b3{
-	flex: 1;
-}
-.b2{
-	flex: 2;
-}
-#b{
-	font-size: 20px;
 }
 #h_content h2{
 	margin-bottom: 50px;
@@ -272,7 +251,7 @@ main{
 	color: black;
 }
 #hh{
-	min-height: 820px;
+	min-height: 700px;
 }
 
 /* 미디어쿼리 css */
@@ -308,7 +287,7 @@ main{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #4F4A45;
+  background-color: #EADBC8;
   color: white;
   text-align: center;
 }

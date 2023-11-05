@@ -15,31 +15,12 @@ if(grade!=99){%>
     alert("관리자페이지입니다");
     window.location="/BookStay/views/main.jsp";
 </script>
-<%}
-ArrayList<MemberDTO> list = null;
-String keyword=request.getParameter("keyword");
-String check=request.getParameter("check");
-if(check==null||check.equals("0")){
-	if(keyword==null){
-	list = adao.getAllMember();
-	}else{
-		list=adao.serchGrade(keyword);
-	}
-}else if(keyword!=null){
-		list = adao.serchGrade(Integer.parseInt(check),keyword);
-}
-%>
+<%}%>
 <form >
-<input type="text" name="keyword" value="<%=keyword%>">
-<select name="check">
-	<option value="0">전체</option>
-	<option value="1">아이디</option>
-	<option value="2">이름</option>
-</select>
-<button>검색</button>
+
 </form>
-<form action="adminGradePro.jsp" method="post">
-<table >
+<form>
+<table action="adminGradePro.jsp" method="post">
  <tr>
  	<td>아이디</td>
  	<td>이름</td>
@@ -48,7 +29,7 @@ if(check==null||check.equals("0")){
  </tr>
 
 <%
-
+ArrayList<MemberDTO> list = adao.getAllMember();
 for(MemberDTO d : list){%>
 	<tr>
 		<td><%=d.getId()%></td>

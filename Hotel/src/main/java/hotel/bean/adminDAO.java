@@ -204,55 +204,6 @@ public class adminDAO extends OracleDB{
 			close(rs, pstmt, conn);
 		} 
 	}
-	public ArrayList<MemberDTO> serchGrade(String keyword){
-		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
-		try {
-			conn=getConnection();
-			String sql="select * from member where name like=? or id like=?";
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+keyword+"%");
-			pstmt.setString(2, "%"+keyword+"%");
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				MemberDTO dto = new MemberDTO();
-				dto.setId(rs.getString("id"));
-				dto.setName(rs.getString("name"));
-				dto.setGrade(rs.getInt("grade"));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rs, pstmt, conn);
-		} return list;
-	}
-	
-	public ArrayList<MemberDTO> serchGrade(int check,String keyword){
-		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
-		try {
-			conn=getConnection();
-			String sql="";
-			if(check==1) {
-				sql="select * from member where id like=?";
-			}else if(check==2) {
-				sql="select * from member where name like=?";
-			}
-			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, "%"+keyword+"%");
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				MemberDTO dto = new MemberDTO();
-				dto.setId(rs.getString("id"));
-				dto.setName(rs.getString("name"));
-				dto.setGrade(rs.getInt("grade"));
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rs, pstmt, conn);
-		} return list;
-	}
 	
 	
 	

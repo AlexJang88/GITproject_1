@@ -21,7 +21,7 @@ public class MemberDAO extends  OracleDB {
 	    return instance;
 	}
 	
-	
+	/*
 	//회원탈퇴 기존꺼
 	public int delete(String id, String pw) {
 	    int result = 0;
@@ -35,63 +35,13 @@ public class MemberDAO extends  OracleDB {
 	    }
 	    return result;
 	}
- //삭제후 자동 타 테이블 이동
-    public int moveDataToQuitMember(String id, String pw) {
-        Connection connection = null;
-        PreparedStatement deleteStatement = null;
-        PreparedStatement insertStatement = null;
-      try {   	
-        	/*Connection conn = getConnection();*/
-            // 데이터베이스 연결 설정 코드
-            // DELETE 쿼리 실행
-            String deleteQuery = "DELETE FROM member WHERE id = ? AND pw = ?";
-            deleteStatement = connection.prepareStatement(deleteQuery);
-            deleteStatement.setString(1, id);
-            deleteStatement.setString(2, pw);
-            int rowsDeleted = deleteStatement.executeUpdate();
-            if (rowsDeleted > 0) {
-                // 삭제가 성공하면 INSERT 쿼리 실행
-                String insertQuery = "INSERT INTO quitmember (num, id, pw, email, birth, pnum, addr, joindate) " +
-                                    "SELECT quitmember_sequence.NEXTVAL, id, pw, email, birth, pnum, addr, joindate " +
-                                    "FROM member WHERE id = ? AND pw = ?";
-                insertStatement = connection.prepareStatement(insertQuery);
-                insertStatement.setString(1, id);
-                insertStatement.setString(2, pw);
-                int rowsInserted = insertStatement.executeUpdate();
-                // 복사된 행의 수를 반환
-                return rowsInserted;
-            } else {
-                // 삭제 실패
-                return 0;
-            }
-        } catch (SQLException e) {
-            // 예외 처리
-            e.printStackTrace();
-            return -1; // 오류 발생 시 -1을 반환하거나 다른 방식으로 처리
-        } finally {
-            try {
-                if (deleteStatement != null) {
-                    deleteStatement.close();
-                }
-                if (insertStatement != null) {
-                    insertStatement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();         
-            } 
-            }
-    }
+ 
     
+	*/
 	
-	
-	
-
-			
+				
 		
-			//아이디중복체크
+	
 	// 아이디 중복 체크
 	public boolean loginCheck(MemberDTO dto) {
 	    boolean result = false;
@@ -178,46 +128,154 @@ public class MemberDAO extends  OracleDB {
 		        return result;
 	    }
 	    
-	/*    public MemberDTO findId2(MemberDTO member) {
-	    	Connection conn = null;
-	    	PreparedStatement pstmt = null;
-	    	ResultSet rs = null;
-	    
-	    	MemberDTO dto=new MemberDTO();
-	    
-	    	try {
-	    		conn = getConnection();
-	    		String sql = "SELECT * FROM member WHERE name=? AND email=? AND pnum=?";
-	    		pstmt = conn.prepareStatement(sql);
-	    		
-	    		pstmt.setString(1, member.getName());
-	    		pstmt.setString(2, member.getEmail());
-	    		pstmt.setString(3, member.getPnum());
-	    		
-	    		rs = pstmt.executeQuery();
-	    		if (rs.next()) {
-	    			dto.setId(); // 사용자 정보가 일치하는 경우
-	    		}
-	    		
-	    	} catch (Exception e) {
-	    		e.printStackTrace();
-	    	} finally {
-	    		close(rs, pstmt, conn);
-	    	}
-	    	return  dto;
+	    // 회원정보수정   -1030 도준생성
+	    public String updateMember2(String pw, String email, String addr, String pnum) {
+	        Connection conn = null;
+	        PreparedStatement pstmt = null;
+	        try {
+	            conn = getConnection();
+	            String sql = "UPDATE member SET pw=?, email=?, addr=?, pnum=?";
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, pw);
+	            pstmt.setString(2, email);
+	            pstmt.setString(3, addr);
+	            pstmt.setString(4, pnum);
+	            /*
+				 * String sql = "UPDATE member SET pw=?, email=?, addr=?, pnum=? WHERE id=?";
+				 * pstmt = conn.prepareStatement(sql); pstmt.setString(1, pw);
+				 * pstmt.setString(2, email); pstmt.setString(3, addr); pstmt.setString(4,
+				 * pnum); pstmt.setString(5, member.getId()); // 해당 회원의 id를 WHERE 절에 추가
+				 */
+	            int rowsUpdated = pstmt.executeUpdate();
+				
+	            if (rowsUpdated > 0) {
+	                return "업데이트가 성공했습니다."; // 성공 메시지 반환
+	            } else {
+	                return "업데이트가 실패했습니다."; // 실패 메시지 반환
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return "오류가 발생했습니다: " + e.getMessage(); // 오류 메시지 반환
+	        } finally {
+	            close(null, pstmt, conn);
+	        }
 	    }
-*/	    
-	   
-	   
 	    
 
-	  
-	    	
-	
+	 
+	    
+	    		//1102 도준 생성  삭제
+	    public int delete(MemberDTO member) {
+	        Connection conn = null;
+	        PreparedStatement deletePstmt = null;
+	        PreparedStatement selectPstmt = null;
+	        int delResult = 0;
+
+	        try {
+	            conn = getConnection();
+	            conn.setAutoCommit(false); // 트랜잭션 시작
+
+	         // 'member' 테이블에서 회원 삭제
+	            String deleteQuery = "DELETE FROM member WHERE id=? AND pw=?";
+	            deletePstmt = conn.prepareStatement(deleteQuery);
+	            deletePstmt.setString(1, member.getId());
+	            deletePstmt.setString(2, member.getPw());
+	            delResult = deletePstmt.executeUpdate();
+	            System.out.println("삭제 작업 성공");
+
+	            if (delResult > 0) {
+	                // 삭제 작업이 성공한 경우
+
+	                // 'member' 테이블에서 회원 정보 가져오기
+	                String selectQuery = "SELECT * FROM member WHERE id=? AND pw=?";
+	                selectPstmt = conn.prepareStatement(selectQuery);
+	                selectPstmt.setString(1, member.getId());
+	                selectPstmt.setString(2, member.getPw());
+	                ResultSet resultSet = selectPstmt.executeQuery();
+	                System.out.println("선택 작업 성공");
+
+	                // 'quitmember' 테이블에 선택된 회원 정보 삽입
+	                if (resultSet.next()) {
+	                    QuitMemberDTO quitMember = new QuitMemberDTO();
+	                    quitMember.setId(resultSet.getString("id"));
+	                    quitMember.setPw(member.getPw());
+	                    quitMember.setName(resultSet.getString("name"));
+	                    quitMember.setEmail(resultSet.getString("email"));
+	                    quitMember.setBirth(resultSet.getString("birth"));
+	                    quitMember.setAddr(resultSet.getString("addr"));
+	                    quitMember.setPnum(resultSet.getString("pnum"));
+	                     
+	                    insertquitMember(quitMember); // 인자로 커넥션 전달
+	                }
+	            }
+
+	            conn.commit(); // 트랜잭션 커밋
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            try {
+	                if (conn != null) {
+	                    conn.rollback(); // 예외 발생 시 트랜잭션 롤백
+	                }
+	            } catch (SQLException rollbackEx) {
+	                rollbackEx.printStackTrace();
+	            }
+	        } finally {
+	            try {
+	                if (deletePstmt != null) {
+	                    deletePstmt.close();
+	                }
+	                if (selectPstmt != null) {
+	                    selectPstmt.close();
+	                }
+	                if (conn != null) {
+	                    conn.setAutoCommit(true); // 트랜잭션 종료 후 자동 커밋 설정
+	                    conn.close();
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        return delResult;
+	    }
+
+	    // 1102 삭제후quitmember 인서트 
+	    public int insertquitMember(QuitMemberDTO quitmember) {
+	        Connection conn = null;
+	        int result = 0;
+	        try {
+	            conn = getConnection();
+	            String sql = "INSERT INTO quitmember (id, pw, name, email, birth, addr, pnum, joindate) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	                pstmt.setString(1, quitmember.getId());
+	                pstmt.setString(2, quitmember.getPw());
+	                pstmt.setString(3, quitmember.getName());
+	                pstmt.setString(4, quitmember.getEmail());
+	                pstmt.setString(5, quitmember.getBirth());
+	                pstmt.setString(6, quitmember.getAddr());
+	                pstmt.setString(7, quitmember.getPnum());
+	                pstmt.setString(8, quitmember.getJoindate());
+	                result = pstmt.executeUpdate();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            result = -1; // 실패한 경우 -1을 반환
+	        } finally {
+	            // Connection 및 리소스 관련 처리
+	        }
+	        return result;
+	    }
+
+
+
+
+
+	    // 다른 메서드 정의
+    
 		public void insertMember(MemberDTO member)throws Exception {
 			try{			
-				  conn = getConnection();
-				 
+				  conn = getConnection();			 
 	 	        String sql = "INSERT INTO member (id, pw, name, email, birth, addr, pnum) VALUES "
 	 	        		+ "(?, ?, ?, ?, ?, ?, ?)";	        
 	 	        pstmt = conn.prepareStatement(sql);        
@@ -273,7 +331,7 @@ public class MemberDAO extends  OracleDB {
                     dto.setPnum(rs.getString("pnum"));
                     dto.setHeart(rs.getString("heart"));
                     dto.setGrade(rs.getInt("grade"));
-                    dto.setJoindate(rs.getTimestamp("joindate"));
+                    dto.setJoindate(rs.getString("joindate"));
                     
                 }
             } catch (Exception e) {
@@ -308,8 +366,7 @@ public class MemberDAO extends  OracleDB {
 		}
       
          return result;
-      }
-    
+      }   
 	public void updateHeart(String id,String heart) {
 		try {
 			conn=getConnection();

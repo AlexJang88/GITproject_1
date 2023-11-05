@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="hotel.bean.MemberDTO" %>
 <%@ page import="hotel.bean.MemberDAO" %>
@@ -7,7 +8,7 @@
 <jsp:setProperty property="*" name="dto" />
 <%
     String sid = (String) session.getAttribute("sid");
-    dto.setId(sid);
+    dto.setId(sid); 			//1030도준수정
 %>
 
 <script>

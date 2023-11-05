@@ -1,0 +1,91 @@
+@charset "utf-8";
+
+
+*{margin-bottom:10px;
+	margin-top:10px;
+	text-align: center;
+}
+.hiddenshow{
+	display: none;
+}
+table {
+	 border: white;
+    width: 100%; /* 수정: 테이블 폭을 80%로 조정 */
+    margin: 0 auto; /* 테이블을 가운데 정렬 */
+    border-collapse: collapse;
+    background-color: white;
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    border-radius: 15px;
+}
+
+
+th,
+td {    
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+table tr a {
+    color: #999999;
+    text-decoration: none;
+}
+#fontment{
+	margin-bottom:10px;
+	
+}
+.close{
+	cursor:pointer; 
+	background-color:198754;
+}
+
+
+.sumitinput {
+margin-top:10px;
+margin-bottom:10px;
+    width:75%;
+    background-color: #198754;
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+font{
+ 	font-weight: bold;
+}
+
+.inputText {
+	left:0;
+	margin-left:0px;
+    width: 75%;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 2px;
+}
+.inputText:first-child{
+	margin-top:10px;
+}
+
+.sumitinput:hover {
+    background-color: #157347;
+}
+.box {
+    width: 32%;
+    height: 38px;
+    color: black;
+    font-size: 14px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#email{
+	width: 42%;
+}

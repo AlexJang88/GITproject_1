@@ -18,9 +18,9 @@
     String name = request.getParameter("name");
     String email = request.getParameter("email");
     String pnum = request.getParameter("pnum");
-    String id=MemberDAO.getInstance().findId(name, email, pnum);
+    String id=MemberDAO.getInstance().findId(name,email,pnum);
     System.out.println(name+","+email+","+pnum);
-    if ( id!= null) {
+    if ( id != null) {
         // 사용자 정보가 일치하는 경우 아이디 보여주는 페이지로 이동
         
         response.sendRedirect("FindIdShow.jsp?id="+id);

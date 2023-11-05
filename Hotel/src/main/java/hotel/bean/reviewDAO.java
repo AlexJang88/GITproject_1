@@ -13,14 +13,14 @@ public class reviewDAO extends OracleDB {
 	private PreparedStatement pstmt=null;
 	private ResultSet rs=null;
 	
-	public List<reviewDTO> getReviewHotel(int hotelNum) {
+	public List<reviewDTO> getReviewHotel(String hotelNum) {
 	    List<reviewDTO> reviews = new ArrayList<>();
 
 	    try {
 	        conn = getConnection();
 	        String sql = "SELECT * FROM review WHERE ref = ?";
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, hotelNum);
+	        pstmt.setString(1, hotelNum);
 
 	        rs = pstmt.executeQuery();
 
@@ -71,53 +71,6 @@ public class reviewDAO extends OracleDB {
 
         
     }
-	
-	
-	public double getAvgJumsu(int hotelNum) {
-	    double avgJumsu = 0;
-
-	    try {
-	        conn = getConnection();
-	        String sql = "select round(avg(jumsu), 1) as avg_jumsu from review where ref = ?";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, hotelNum);
-
-	        rs = pstmt.executeQuery();
-
-	        if (rs.next()) {
-	            avgJumsu = rs.getDouble("avg_jumsu");
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(rs, pstmt, conn);
-	    }
-	    
-	    return avgJumsu;
-	}
-	
-	public int getcount(int hotelNum) {
-	    int count = 0;
-
-	    try {
-	        conn = getConnection();
-	        String sql = "select count(*) from review where ref = ?";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, hotelNum);
-
-	        rs = pstmt.executeQuery();
-
-	        if (rs.next()) {
-	            count = rs.getInt(1);
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(rs, pstmt, conn);
-	    }
-	    
-	    return count;
-	}
 	
 
 }

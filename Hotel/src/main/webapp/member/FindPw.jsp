@@ -129,41 +129,54 @@ function updateEmail() {
 
          
 </script>
-    <h1>비밀번호 찾기위해서 필요한 정보를  입력해주세요 </h1>
+  
+      <link rel="stylesheet" href="resources/FindPw.css" type="text/css">
 <form action="FindPwPro.jsp" method="post" id="registrationForm" name="userinput">
 <table>
+
+<tr>
+<td class="hiddenshow"></td>
+
+
+<td>
+  <h1 id="fontment" >비밀번호 찾기위해서<br/>필요한 정보를<br/> 입력해주세요</h1>
+</td>
+<td></td>
+</tr>
             <tr>
-                <td colspan="2" height="39" align="center" >
-                   
-                </td>
-            </tr>
-            <tr>
-                <td width="200">
+         
+                <td width="200" align="center" class="hiddenshow">
                     <label>아이디</label>
                 </td>
                 <td width="400">
-                    <input type="text"   name="id" size="10" maxlength="12" style="width:210px" required>          
+                    <input type="text"     class="inputText"  name="id" size="10" maxlength="12" placeholder="아이디를 입력하세요"  required>          
                 </td>
+                <td></td>
             </tr>
          
      
-            <tr>
-                <td width="200">
+             <tr>
+       
+                <td width="200" align="center" class="hiddenshow">
                     <label for="name">이름</label>
                 </td>
+             
                 <td width="400">
-                    <input type="text"   name="name" size="15" maxlength="12" style="width:210px" required>
+                    <input type="text"  placeholder="이름을 입력하세요"   name="name" size="15"  class="inputText"   maxlength="12" required>
+ 
                 </td>
+                <td></td>
+                
+                
             </tr>
-            <tr>
-                <td width="400">
+            
+            
+           <tr>
+                <td width="400"  class="hiddenshow">
                     <label for="email">이메일</label>
                 </td>
-	                <td width="400">
-	  
-			 
-			    <input type="text" id="email" name="email" size="14" style="width:210px" required />
-			
+	                <td width="400">	  			 
+			    <input type="text" id="email" name="email" size="14"   placeholder="이메일을 입력하세요"  class="inputText"     required />			
 			    <select class="box" id="emaillist" name="emaillist" onchange="updateEmail()">
 			        <option value="type">직접 입력</option>
 			        <option value="@naver.com">@naver.com</option>
@@ -172,26 +185,34 @@ function updateEmail() {
 			        <option value="@nate.com">@nate.com</option>
 			        <option value="@kakao.com">@kakao.com</option>
 			    </select>
-
-
 	                </td>
+	                
+	                      <td></td>
+                
             </tr>
        
          
             <tr>
-                <td width="200">
+                <td   class="hiddenshow">
                     <label for="pnum">휴대폰번호</label>
                 </td>
                 <td width="400">
-                    <input type="text" name="pnum"   size="15" required style="width:210px" maxlength="13" oninput="formatPhoneNumber(this);">
+                    <input type="text" name="pnum"   class="inputText" placeholder="휴대폰번호를 입력하세요"    size="15" required maxlength="13" oninput="formatPhoneNumber(this);">
+                </td>
+                
+                <td>
                 </td>
             </tr>
-            <tr>
+          
+          
+            <tr>          
+            <td class="hiddenshow"></td>
+            <td>  <input type="submit" name="confirm" value="비밀번호 찾기"   class="sumitinput" onclick="combineAndSubmit()"/></td>
+            <td></td>
+            </tr>
+        
 	
-</table>								
-     <input type="submit" name="confirm" value="비밀번호 찾기"   onclick="combineAndSubmit()"/>
   
+</table>								
+   
 </form>
-
-<button onclick="window.location='../views/main.jsp'">메인</button>
-<button onclick="window.location='loginform.jsp'">로그인하기</button>

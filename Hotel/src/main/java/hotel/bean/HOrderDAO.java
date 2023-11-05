@@ -143,7 +143,7 @@ public class HOrderDAO extends OracleDB {
    	     close(rs, pstmt, conn);
    	    }return result;
    	}
-    public int getRecentOrder(String id) {
+    public int getOrderNum(String id) {
     	int result=0;
     	try {
 			conn=getConnection();

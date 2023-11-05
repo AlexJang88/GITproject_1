@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="hotel.bean.MemberDTO" %>
 <%@ page import="hotel.bean.MemberDAO" %>
@@ -16,7 +17,9 @@
     <title>비밀번호 변경 결과</title>
 </head>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
+<% request.setCharacterEncoding("UTF-8");
+												//1030 도준수정
+%>
 <%
     String sid = (String) session.getAttribute("sid");
     dto.setId(sid);
