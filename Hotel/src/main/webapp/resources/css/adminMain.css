@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+/* 메뉴바 css */
+body{
+	padding-top: 20px;
+}
+#login{
+	display: flex;
+	justify-content: right;
+}
+#login div{
+	margin-right: 20px;
+	cursor: pointer;
+}
+#logo{
+	position: absolute;
+	top: 0;
+	margin: 30px 0 0;
+	width: 180px;
+	font-size: 30px;
+	font-weight: 800;
+	padding: 10px;
+	z-index: 150;
+}
+#block2{
+	display: none;
+}
+#header a{
+	text-decoration: none;
+	color: black;
+}
+#header{
+	width: 90%;
+	min-height: 130px;
+	margin: 0 auto;
+}
+#hr{
+	margin: 0;
+}
+/* 메뉴바 css */
+
+
+
+/* 캘린더 css */
+#clendarBox {
+	margin-top: 100px;
+     width: 50%;
+     margin-left: 15%;
+     display: inline-block;
+     position: relative;
+}
+.fc-day, .fc-event {
+     cursor: pointer;
+     text-decoration: none;
+     color:black;
+}
+.fc-dayGridDay .fc-day {
+  height: 60px; 
+  overflow: hidden; 
+}
+.fc-col-header-cell-cushion, .fc-daygrid-day-number{
+ 	text-decoration: none;
+     color:black;
+} 
+#btn1{
+ 	position: absolute;
+     top: 20px; 
+     left: 0; 
+}
+ #btn{
+ 	display: none;
+  	border: none;
+  	border-radius: 5px;
+   	background-color: #2C3E50;
+   	color: white;
+    height: 28px;
+    padding: 5px;
+}
+
+#list{
+	display: flex;
+}
+
+#ul1 {
+  border-right: 1px solid gainsboro;
+  flex: 1;
+  display: inline-block;
+  list-style-type: none;
+  width: 17%;
+  background-color: white;
+  padding: 0 !important;
+  margin:0 !important;
+}
+
+#bn3, #bn2, #bn4, #bn5, #bn6 {
+  width: 100%;
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+}
+#bn1{
+	width: 100%;
+	  display: block;
+	  color: white;
+	  padding: 8px 16px;
+	  text-decoration: none;
+	  border: none;
+	  background-color: #555;
+}
+#tbcal{
+	display: flex;
+	flex-direction: column;
+}
+#f1{
+	flex: 4;
+	padding:0 30px 0;
+}
+#calendar{
+	margin-top: 50px;
+	width: 100%;
+	height: auto;
+}
+
+#ul1 li button:hover {
+  background-color: #555;
+  color: white;
+}
+.nav{
+	margin-top: 20px;
+}
+.t1{
+	background-color: #EEEEEE;
+}
+#tb{
+	width: 100%;
+	height: 200px;
+}
+#tb td{
+	border: 1px solid black;
+	padding-left: 10px;
+}

@@ -55,14 +55,37 @@ public class boardDAO extends OracleDB{
 	
 	public void boardInsert(boardDTO dto) {
 		try {
+			String sql="";
 			conn=getConnection();
-			String sql="insert into board(num,content,id,title,category) values(board_seq.nextval,?,?,?)";
+			if(dto.getCategory()==30) {
+				if(dto.getRe_step()==0) {
+					sql="insert into board(num,content,id,title,category,ref) values(board_seq.nextval,?,?,?,?,board_seq.currval)";
+				}else if(dto.getRe_step()==1) {
+					sql="insert into board(num,content,id,title,category,ref,re_step) values(board_seq.nextval,?,?,?,?,?,1)";
+				}	
+			}else {
+			sql="insert into board(num,content,id,title,category) values(board_seq.nextval,?,?,?,?)";
+			}
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getId());
-			pstmt.setString(2, dto.getContent() );
+			if(dto.getRe_step()==1) {
+				pstmt.setString(1, dto.getContent() );
+				pstmt.setString(2, dto.getId());
+				pstmt.setString(3, dto.getTitle());
+				pstmt.setInt(4, dto.getCategory());
+				pstmt.setInt(5, dto.getRef());
+			}else {
+			pstmt.setString(1, dto.getContent() );
+			pstmt.setString(2, dto.getId());
 			pstmt.setString(3, dto.getTitle());
 			pstmt.setInt(4, dto.getCategory());
+			}
 			pstmt.executeUpdate();
+			if(dto.getRe_step()==1) {
+				sql="update board set re_step=1 where ref=?";
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setInt(1, dto.getRef());
+				pstmt.executeUpdate();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -85,10 +108,15 @@ public class boardDAO extends OracleDB{
 			close(rs, pstmt, conn);
 		}
 	}
-	public void boardDelete(int num) {
+	public void boardDelete(int num,int category) {
 		try {
 			conn=getConnection();
-			String sql="delete from board where num=?";
+			String sql="";
+			if(category!=30) {
+			sql="delete from board where num=?";
+			}else {
+			sql="delete from board where ref=?";
+			}
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.executeUpdate();
@@ -121,13 +149,46 @@ public class boardDAO extends OracleDB{
 			close(rs, pstmt, conn);
 		}return list;
 	}
-	public ArrayList<boardDTO> getMyList(String id){
+	
+	public boardDTO getContent(int num) {
+		boardDTO dto = new boardDTO();
+		try {
+			conn=getConnection();
+			String sql="select * from board where num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setCategory(rs.getInt("category"));
+				dto.setContent(rs.getString("content"));
+				dto.setId(rs.getString("id"));
+				dto.setNum(rs.getInt("num"));
+				dto.setReg(rs.getTimestamp("reg"));
+				dto.setTitle(rs.getString("title"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		}
+		
+		
+		return dto;
+	}
+	
+	public ArrayList<boardDTO> getMyList(int grade,String id){
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
 		try {
 			conn=getConnection();
-			String sql ="select * from board where id=?";
+			String sql="";
+			if(grade==99) {
+				sql="select * from board where category=30 and re_step=0 order by reg";
+				pstmt=conn.prepareStatement(sql);
+			}else {
+			sql ="select * from board where ref in(select ref from board where id=? and category=30)";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, id);
+			}
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				boardDTO dto = new boardDTO();
@@ -137,6 +198,8 @@ public class boardDAO extends OracleDB{
 				dto.setNum(rs.getInt("num"));
 				dto.setReg(rs.getTimestamp("reg"));
 				dto.setTitle(rs.getString("title"));
+				dto.setRef(rs.getInt("ref"));
+				dto.setRe_step(rs.getInt("re_step"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
@@ -145,6 +208,32 @@ public class boardDAO extends OracleDB{
 			close(rs, pstmt, conn);
 		}return list;
 		
+	}
+	public boardDTO getAnswer(int ref) {
+		boardDTO dto = new boardDTO();
+		try {
+			conn=getConnection();
+			String sql="select * from board where ref=? and not num=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, ref);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				dto.setCategory(rs.getInt("category"));
+				dto.setContent(rs.getString("content"));
+				dto.setId(rs.getString("id"));
+				dto.setNum(rs.getInt("num"));
+				dto.setRe_step(rs.getInt("re_step"));
+				dto.setRef(rs.getInt("ref"));
+				dto.setReg(rs.getTimestamp("reg"));
+				dto.setTitle(rs.getString("title"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs, pstmt, conn);
+		} return dto;
 	}
 	
 }

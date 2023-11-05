@@ -1,0 +1,343 @@
+@charset "UTF-8";
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+body{
+	padding-top: 20px;
+}
+#login{
+	display: flex;
+	justify-content: right;
+}
+#login div{
+	margin-right: 20px;
+	cursor: pointer;
+}
+#logo{
+	position: absolute;
+	top: 0;
+	margin: 30px 0 0;
+	width: 180px;
+	font-size: 30px;
+	font-weight: 800;
+	padding: 10px;
+	z-index: 150;
+}
+a{
+	text-decoration: none;
+	color: black;
+}
+#button{
+	right: 0;
+}
+#main{
+	width: 100%;
+	margin: 0 0 30px;
+	border: 1px solid gainsboro;
+	border-width: 1px 0;
+	height: 70px;
+	background-color: white;
+	z-index: 100;
+}
+#subb img{
+	width: 30px;
+}
+.button-link {
+    text-align: center;
+}
+
+.button-link img {
+    display: block;
+    margin: 0 auto; 
+}
+#button{
+	display: flex;
+}
+.popup{
+	display: none;
+	background-color: white;
+	text-align: center;
+	width: 300px;
+}
+.on{
+	display: block;
+}
+#popup{
+	position: absolute;
+	right: 0;
+	box-shadow: 1px 1px 3px black;
+	z-index: 10;
+}
+#popup h5{
+	font-size: 18px;
+}
+#popup input[type="number"]{
+	width: 50px;
+}
+#searchForm{
+	height: 45px;
+	width: 100%;
+    box-sizing: border-box;
+}
+#searchForm input{
+	border: none;
+}
+#popBtn{
+	background-color: white;
+}
+#header{
+	width: 90%;
+	min-height: 130px;
+	margin: 0 auto;
+}
+#search{
+	width: 65%;
+	margin: 0 auto;
+}
+#content{
+	position: relative;
+}
+#search{
+	position: relative;
+}
+#h_sel{
+	position: absolute;
+	right: 0;
+	text-align: right;
+	display: inline-block;
+}
+#all_h{
+	width: 65%;
+	margin: 0 auto;
+	display: inline-block;
+	min-height: 1200px;
+}
+.list_s img{
+	width: 180px;
+	height: 100%;
+}
+.list_s{
+	display: flex;
+}
+.list_c{
+	position: relative;
+}
+#hselect{
+	position: absolute;
+	right: 10px;
+	top: 0;
+}
+.grid {
+    display: flex;
+    width: 65%;
+	justify-content: center;
+	margin: 0 auto;
+	position: relative;
+}
+.box{	  
+	border: none;
+	padding: 10px;
+}
+#box11{
+	flex: 1;
+}
+#box2{
+	flex: 4;
+	min-width: 800px;
+}
+#h_chk ul{
+	list-style: none;
+}
+#h_chk ul li{
+	margin: 10px 0;
+}
+#h_chk p{
+	font-size: 18px;
+	font-weight: 800;
+}
+#h_chk{
+	width: 230px;
+	display: inline-block;
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	padding: 10px 20px;
+}
+#h_select{
+	position: absolute;
+	top: 0;
+}
+#searchForm #date{
+	width: 200px;
+}
+#searchForm #text{
+	position: absolute;
+	left: 0;
+	border-radius: 35px;
+	width: 30%;
+}
+#searchForm input{
+	height: 66px;
+	border: none;
+}
+#subb{
+	position: absolute;
+	right: 0;
+	width: 68px;
+	height: 68px;
+	border: none;
+	background-color: white;
+}
+#searchForm input[type="button"]{
+	background-color: white;
+}
+#searchForm{
+	background-color: white;
+}
+#title{
+	width: 400px;
+	margin-right: 120px;
+}
+#date{
+	margin-right: 120px;
+}
+.rBtn{
+	display: inline-block;
+	margin-top: 110px;
+}
+.rBtn button{
+	width: 150px;
+}
+.title{
+	font-size: 20px;
+	font-weight: 800;
+}
+.mar{
+	margin-left: 30px;
+	width: 800px;
+}
+.addr{
+	color: lightgray;
+}
+.apr{
+	position: absolute;
+	right: 0;
+	font-size: 20px;
+}
+.qnrktp{
+	margin-top: 30px;
+	position: absolute;
+	right: 0;
+	font-size: 12px;
+	color: gainsboro;
+}
+#option{
+	min-width: 300px;
+}
+.xx{
+	position: absolute;
+	right: 160px;
+	top: 10px;
+	margin-top: 100px;
+}
+
+
+/* 스크롤 내렸을 때 검색창 고정 css */
+.fixed-menu {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   box-shadow: -1px 2px 16px gainsboro;
+}
+
+
+
+/* 페이지 css */
+#page{
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 100px;
+}
+.button{
+	padding: 6px 10px;
+	border: 1px solid gainsboro;
+	background-color: white;
+}
+
+/* 객실 추가 css */
+#popup{
+	width: 350px;
+	position: absolute;
+	top: 75px;
+	left: 60%;
+	box-shadow: 1px 1px 3px black;
+	padding: 20px 10px;
+	border-radius: 5px;
+}
+#popup h5{
+	font-size: 18px;
+	font-weight: 800;
+}
+#popup input[type="number"]{
+	width: 50px;
+	height: 30px;
+}
+#popup input[type="button"]{
+	border: 1px solid black;
+}
+#popup #cad{
+	width: 200px;
+	background-color: green;
+	color: white;
+	border-radius: 5px;
+	border: none;
+	height: 50px;
+}
+#popup #cadd{
+	height: 50px;
+	padding: 0 18px;
+	border-radius: 5px;
+}
+#popup {
+  max-height: 500px;
+  overflow-y: auto; 
+}
+/* 객실 추가 css */
+
+
+/* footer css */
+.footer {
+  margin-top:400px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #4F4A45;
+  color: white;
+  text-align: center;
+}
+.footer img{
+	width: 30px;
+	float: right;
+}
+.footer ul li {
+  list-style: none;
+}
+
+#footer2 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#footer4 {
+  display: flex;
+  justify-content: center;
+  height: 38px;
+}
+#footer span {
+  font-size: 8px;
+  margin: 0 5px;
+}

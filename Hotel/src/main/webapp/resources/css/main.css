@@ -1,0 +1,336 @@
+@charset "UTF-8";
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+/* swiper css */
+html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  /* swiper css */
+body{
+	overflow-x: hidden;
+	margin: 0 auto;
+}
+.popup{
+	display: none;
+	background-color: white;
+	text-align: center;
+	width: 300px;
+}
+#login a{
+	text-decoration: none;
+	color: black;
+}
+#popup {
+  max-height: 500px;
+  overflow-y: auto; 
+}
+.on{
+	display: block;
+}
+#searchForm{
+	border: 1px;
+	border-radius: 35px;
+	box-shadow: -1px 2px 16px gainsboro;
+	text-align: center;
+	width: 70%;
+	height: 70px;
+	display: inline-block;
+	position: relative;
+}
+
+/* 객실 추가 css */
+#popup{
+	width: 350px;
+	position: absolute;
+	top: 75px;
+	left: 55%;
+	box-shadow: 1px 1px 3px black;
+	padding: 20px 10px;
+	border-radius: 5px;
+}
+#popup h5{
+	font-size: 18px;
+	font-weight: 800;
+}
+#popup input[type="number"]{
+	width: 50px;
+	height: 30px;
+}
+#popup input[type="button"]{
+	border: 1px solid black;
+}
+#popup #cad{
+	width: 200px;
+	border: none;
+	background-color: green;
+	color: white;
+	border-radius: 5px;
+	height: 50px;
+}
+#popup #cadd{
+	height: 50px;
+	padding: 0 18px;
+	border-radius: 5px;
+}
+/* 객실 추가 css */
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 200;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 15px;
+  box-shadow: 0px 2px 4px 0px;;
+}
+#myBtn img{
+	width: 30px;
+}
+.hobtn:hover{
+	background-color: black;
+	color: white;
+}
+#hBtn{
+	background-color: white;
+	border: 1px solid gainsboro;
+	border-radius: 50px;
+	padding: 10px 5px;
+	width: 300px;
+	font-size: 18px;
+}
+#hBtn:hover{
+	background-color: black;
+	color: white;
+}
+.grid {
+    display: grid;
+	justify-content: center;
+    grid-template-rows: 120px 120px 120px;
+    grid-template-columns: 350px 350px 350px;
+    margin-bottom: 80px;
+}
+#popBtn{
+	margin-left: 50px;
+}
+.box{	  
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	justify-content: space-around;
+	text-align: left;
+	position: relative;
+}
+.box img{
+	width: 100px;
+}
+.pri{
+	position: absolute;
+	right: 15px;
+	bottom: 10px;
+}
+.b3{
+	flex: 1;
+}
+.b2{
+	flex: 2;
+}
+#b{
+	font-size: 20px;
+}
+#h_content h2{
+	margin-bottom: 50px;
+}
+#hot_hotel .hobtn{
+	border-radius: 50px;
+	padding: 10px 20px;
+	margin-bottom: 60px;
+}
+#searchForm #date{
+	width: 200px;
+}
+#searchForm #text{
+	position: absolute;
+	left: 0;
+	border-radius: 35px;
+	width: 30%;
+}
+#searchForm input{
+	height: 68px;
+	border: none;
+}
+#searchForm button[type="submit"]{
+	position: absolute;
+	width: 120px;
+	right: 10;
+	border-radius: 35px;
+	height: 50px;
+	margin-top: 10px;
+}
+main{
+	position: relative;
+}
+#searchForm input[type="button"]{
+	background-color: white;
+}
+#searchForm{
+	background-color: white;
+}
+#h_content{
+	margin-top: 100px;
+	text-align: center;
+}
+#hot_hotel button{
+	border: 1px solid lightgray;
+	padding: 5px 10px;
+	color: rgb(128, 128, 128);
+	background-color: white;
+	border-radius: 20px;
+	margin: 0 10px;
+}
+#hoth{
+	text-decoration: none;
+	color: black;
+}
+#login{
+	position: absolute;
+	top: 20px;
+	right: 0;
+	display: flex;
+	justify-content: right;
+	z-index: 150;
+}
+#login div{
+	margin-right: 20px;
+	cursor: pointer;
+}
+#logo{
+	position: absolute;
+	top: 0;
+	margin-left: 20px;
+	width: 180px;
+	font-size: 30px;
+	font-weight: 800;
+	padding: 10px;
+	z-index: 150;
+}
+#bg{
+	grid-column: auto;
+	position: relative;
+}
+#main1{
+	width: 100%;
+	position: absolute;
+	top: 500px;
+	z-index: 100;
+	text-align: center;
+}
+#bg a{
+	text-decoration: none;
+	color: black;
+}
+#hh{
+	min-height: 820px;
+}
+
+/* 미디어쿼리 css */
+@media screen and (max-width: 1100px) {
+	.grid {
+	    display: grid;
+		justify-content: center;
+	    grid-template-rows: 170px 170px 170px;
+	    grid-template-columns: 170px 170px 170px;
+	    column-gap: 40px;
+	    row-gap: 20px;
+	}
+	.h_box{
+		display: none;
+	}
+	.box{
+		display: flex;
+		justify-content: center;
+		padding: 0;
+	}
+	.box img{
+		width: 150px;
+	}
+	#hh{
+	min-height: 900px;
+	}
+}
+
+
+/* footer css */
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #4F4A45;
+  color: white;
+  text-align: center;
+}
+.footer img{
+	width: 30px;
+	float: right;
+}
+.footer ul li {
+  list-style: none;
+}
+
+#footer2 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#footer4 {
+  display: flex;
+  justify-content: center;
+  height: 38px;
+}
+#footer span {
+  font-size: 8px;
+  margin: 0 5px;
+}

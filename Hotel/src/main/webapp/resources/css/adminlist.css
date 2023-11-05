@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+#block2{
+	padding: 0 30px 0;
+}
+#table1 th ,td{
+	border: 1px solid black !important;
+	padding: 5px 0 5px 7px;
+}
+#table1{
+	width: 100%;
+	text-align: center;
+	margin-bottom: 50px;
+}
+#table1 th{
+	background-color: #EEEEEE;
+	padding: 10px 0;
+}
+
+/* 사이드메뉴 css */
+#list{
+	display: flex;
+	height: -webkit-fill-available;
+}
+#ul1 {
+  flex: 1;
+  display: inline-block;
+  list-style-type: none;
+  width: 17%;
+  background-color: white;
+  padding: 0 !important;
+  margin:0 !important;
+  border-right: 1px solid gainsboro;
+}
+#bn1, #bn3, #bn4, #bn5, #bn6 {
+  width: 100%;
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+}
+#f1{
+	flex: 4;
+	padding:0 30px 0;
+}
+#ul1 li button:hover {
+  background-color: #555;
+  color: white;
+}
+/* 사이드메뉴 css */
+
+.nav{
+	margin-top: 20px;
+}
+#bn2{
+	  width: 100%;
+	  display: block;
+	  color: white;
+	  padding: 8px 16px;
+	  text-decoration: none;
+	  border: none;
+	  background-color: #555;
+}

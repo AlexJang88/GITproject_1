@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+#list{
+	width: 65%;
+	margin: 0 auto;
+	margin-top: 100px;
+	position: relative;
+}
+#form1 input[type="text"]{
+	width: 100%;
+	height: 50px;
+	border: none;
+}
+#form1 textarea{
+	width: 100%;
+	height: 300px;
+	border: none;
+}
+#list h2{
+	border-bottom: 2px solid black;
+	padding-bottom: 20px;
+	margin-bottom: 30px;
+}
+#tb{
+	width: 100%;
+}
+#tb td{
+	border: 1px solid gainsboro !important;
+	border-width: 1px 0;
+}
+.title{
+	padding: 20px;
+	text-align: center;
+}
+#sel{
+	width: 140px;
+	height: 35px;
+	margin-left: 20px;
+}
+#btn{
+	position: absolute;
+	width: 120px;
+	height: 40px;
+	background-color: #0C356A;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	right: 0;
+	bottom: -50px;
+}

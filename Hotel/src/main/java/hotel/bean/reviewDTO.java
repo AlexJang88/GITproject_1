@@ -9,6 +9,13 @@ public class reviewDTO {
 	private String image;
 	private Timestamp reg;
 	private int jumsu;
+	private int ref;
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
 	public int getNum() {
 		return num;
 	}

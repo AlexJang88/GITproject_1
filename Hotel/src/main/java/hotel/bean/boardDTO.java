@@ -9,6 +9,8 @@ public class boardDTO {
 	private String content;
 	private String title;
 	private int category;
+	private int ref;
+	private int re_step;
 	
 	
 	public int getNum() {
@@ -47,4 +49,17 @@ public class boardDTO {
 	public void setCategory(int category) {
 		this.category = category;
 	}
+	public int getRef() {
+		return ref;
+	}
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+	public int getRe_step() {
+		return re_step;
+	}
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+	
 }

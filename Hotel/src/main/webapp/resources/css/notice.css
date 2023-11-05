@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+#block3{
+	display: none;
+	height: 100%;
+}
+
+/* 사이드메뉴 css */
+#list{
+	display: flex;
+	height: -webkit-fill-available;
+}
+#ul1 {
+  flex: 1;
+  display: inline-block;
+  list-style-type: none;
+  width: 17%;
+  background-color: white;
+  padding: 0 !important;
+  margin:0 !important;
+  border-right: 1px solid gainsboro;
+}
+#bn1, #bn2, #bn4, #bn5, #bn6, #bn7 {
+  width: 100%;
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  background-color: white;
+}
+#f1{
+	flex: 4;
+	padding:0 30px 0;
+}
+#ul1 li button:hover {
+  background-color: #555;
+  color: white;
+}
+/* 사이드메뉴 css */
+
+.nav{
+	margin-top: 20px;
+}
+#bn3{
+	  width: 100%;
+	  display: block;
+	  color: white;
+	  padding: 8px 16px;
+	  text-decoration: none;
+	  border: none;
+	  background-color: #555;
+}
+.board-item a{
+	text-decoration: none;
+	color: black;
+}
+.board-item{
+	padding: 15px;
+	border-bottom: 1px solid gainsboro;
+}
+.title{
+	font-size: 18px;
+	font-weight: 500;
+}
+.con{
+	background-color: #F2F2F2;
+	padding: 15px 10px;
+	margin-top: 10px;
+}
+.c3{
+	flex: 1;
+}
+.c1{
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #105652;
+	margin-right: 10px;
+}
+.board{
+	display: flex;
+}
+.c2{
+	padding: 5px;
+	background-color: #FBD148;
+	color: white;
+	border: none;
+	border-radius: 5px;
+}
+#c3{
+	float: right;
+	margin-top: 20px;
+	width: 100px;
+	border: none;
+	background-color: #1B1A17;
+	color: white;
+	border-radius: 5px;
+	height: 40px;
+	margin-bottom: 30px;
+}

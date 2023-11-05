@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #4F4A45;
+  color: white;
+  text-align: center;
+}
+.footer img{
+	width: 30px;
+	float: right;
+}
+.footer ul li {
+  list-style: none;
+}
+
+#footer2 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#footer4 {
+  display: flex;
+  justify-content: center;
+  height: 38px;
+}
+#footer span {
+  font-size: 8px;
+  margin: 0 5px;
+}

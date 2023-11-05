@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+/* 메뉴바 css */
+body{
+	padding-top: 20px;
+}
+#login{
+	display: flex;
+	justify-content: right;
+}
+#login div{
+	margin-right: 20px;
+	cursor: pointer;
+}
+#logo{
+	position: absolute;
+	top: 0;
+	margin: 30px 0 0;
+	width: 180px;
+	font-size: 30px;
+	font-weight: 800;
+	padding: 10px;
+	z-index: 150;
+}
+#block2{
+	display: none;
+}
+#header a{
+	text-decoration: none;
+	color: black;
+}
+#header{
+	width: 90%;
+	min-height: 130px;
+	margin: 0 auto;
+}
+#hr{
+	margin: 0;
+}
+/* 메뉴바 css */
